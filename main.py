@@ -30,6 +30,12 @@ def numpy_basics(data):
     mult = A @ A_inv
 
 
+def tests():
+    # TODO: Complete...
+    pass
+
+
+
 def distributions():
     dist = scipy.stats.chi2(df=5)
 
@@ -58,13 +64,36 @@ def distributions():
     print(mu_fit)
     print(std_fit)
 
+
+def pandas_filtering():
+    data = pd.DataFrame(
+        {
+         'Last_Name': ['Smith', None, 'Brown'],
+         'First_Name': ['John', 'Mike', 'Bill'],
+         'Age': [35, 45, None]
+        }
+    )
+
+    # Sort by one column values
+    data = data.sort_values(by='Age', ascending=False)
+
+    # Filter all rows with a particular condition
+    data = data[data.Age > 36]
+
+    # Select subset of columns
+    data = data[['Age', 'Last_Name']]
+
+    # Drop a column
+    data = data.drop(['Age'], axis=1)
+
+    # Filtering all rows with null values in any of its columns
+    data = data.dropna()
+
+
+
 # TODO:
 # * Create histograms
-# * Calculate quantiles of a dist
 # * Do a test (t-test?)
-# * Pandas:
-#   * Data frame filters
-#   * Remove null values
 # * statsmodels + scikit-learn + numpy + pandas
 
 
@@ -75,6 +104,9 @@ def load_data():
 
 if __name__ == '__main__':
     data = load_data()
+    pandas_filtering()
     std_and_mean(data)
     numpy_basics(data)
     distributions()
+    tests()
+
