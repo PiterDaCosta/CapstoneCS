@@ -39,6 +39,7 @@ def tests():
 
 
 def distributions():
+    # Example: chi squared distribution with 5 degrees of freedom.
     dist = scipy.stats.chi2(df=5)
 
     mean = dist.mean()
@@ -75,6 +76,33 @@ def pandas_filtering():
          'Age': [35, 45, None]
         }
     )
+    # get dataframe statistics
+    print(data.describe())
+
+    # Integer location indexing of elements
+    i = 2  # row
+    j = 1  # column
+    d = data.iloc[i, j]
+
+    # Second row (indices starts at 0)
+    r = data.iloc[1]
+
+    # Second column
+    col = data.iloc[:, 1]
+
+    # Label indexing
+    # All rows, just "Last_Name" and "Age" columns
+    selection = data.loc[:, ['Last_Name', 'Age']]
+
+    # Count NaN values under a single DataFrame column
+    sum = data.isna().sum()
+
+    # Count NaN values under an entire DataFrame
+    sum = data.isna().sum().sum()
+
+    # Count NaN values across a single DataFrame row
+    row_index = 1
+    sum = data.loc[row_index].isna().sum().sum()
 
     # Sort by one column values
     data = data.sort_values(by='Age', ascending=False)
@@ -91,6 +119,7 @@ def pandas_filtering():
     # Filtering all rows with null values in any of its columns
     data = data.dropna()
 
+    return
 
 def charts(data):
     # Basic plotting with matplotlib
@@ -113,7 +142,6 @@ def charts(data):
     ax2.set_xlabel('time (s)')
     ax2.set_ylabel('Undamped')
     matplotlib.pyplot.show()
-
 
     # Assuming data is a pandas data frame
     # Histogram plotting
